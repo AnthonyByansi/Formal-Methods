@@ -13,6 +13,7 @@ The specification for the library management system defines the various entities
 To use the specifications in this repository, you will need to have LaTeX installed on your system. You can find instructions for installing LaTeX on the LaTeX Project website.
 
 Once you have LaTeX installed, you can compile the specifications by using the pdflatex command. For example, to compile the vending machine specification, you can run the following command: `pdflatex vending-machine.tex`
+This will generate a PDF file called vending-machine.pdf that contains the compiled specification.
 
 
 ## Using the specifications
@@ -23,3 +24,12 @@ We welcome contributions to these specifications. If you would like to suggest a
 
 ## License
 These specifications are released under the MIT License.
+
+Disclaimer
+Please note that the specifications in this repository are for educational purposes only and are not meant to be used as a definitive guide for designing or implementing real-world systems. While we have made every effort to ensure the accuracy and completeness of the specifications, we cannot guarantee that they are error-free.
+
+## Feedback
+We welcome feedback on the specifications in this repository. If you have any comments or suggestions, please open an issue in the repository or send us an email.
+
+## Acknowledgements
+We would like to thank DR. BITWIRE GEORGE for their support in creating these specifications. Without their help, this repository would not have been possible.
