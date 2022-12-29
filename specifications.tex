@@ -1,0 +1,313 @@
+\documentclass{article}
+\usepackage[left=2.5cm, right=2.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{zed-csp}
+\usepackage{graphicx}
+
+\usepackage{titlesec}
+
+\titleformat{\subsection}[hang]{\Large\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\title{\huge \textbf{FORMAL METHODS COURSEWORK}}
+\author{\textbf{Group 3 BSSE Year 2}}
+\date{2nd January 2023}
+
+% \begin{center}
+% \includegraphics[scale=0.9]{muklogo.png}
+% \end{center}
+
+
+
+
+\begin{document}
+
+\maketitle
+
+
+%  the tabular environment is used to define a table with 3 columns. The c column specifier is used to specify that the columns should be centered, and the | characters are used to add vertical lines to the table.The \hline command is used to draw horizontal lines between the rows. The \textbf{} command is used to set the text in bold font.
+
+\begin{table}[h]
+\resizebox{.9\textwidth}{!}{
+\centering
+\begin{tabular}{|c|c|c|}
+% \caption{Table Title}
+\hline
+\textbf{No.} & \textbf{Name} & \textbf{Registration Number} \\
+\hline
+1 & AMANDA ANN KIRABO & 21/U/04763/PS \\
+2 & NANYONGA RAHMAH  & 21/U/11530/PS \\
+3 & NSEREKO KAYONGO JULIUS & 21/U/14339/PS \\
+4 & BAZZIWE MARVIS & 21/U/0423 \\
+5 & LOGURA WALTER AKERA & 20/U/5681/EVE \\
+6 & NAMULYA ISAAC JONAH  & 19/U/8712/EVE \\
+7 & MUYAMA MONICA & 21/U/1209 \\
+8 & GAFABUSA WILLY  & 21/U/13385/EVE \\
+9 & ABAINE SHANICE TUMUSIIME & 21/U/12392/PS \\
+10 & BYANSI ANTHONY & 21/U/0006 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\centering
+\section{THE-VENDING-MACHINE}
+The Vending Machine schema defines the state space of the vending machine, including the sets of goods, coins, and prices, as well as the maximum number of goods that can be stored in the machine.
+\begin{schema}{VendingMachine}
+\zedsymbol{Goods}
+\zedsymbol{MaxGoods}
+\zedsymbol{Coins}
+\zedsymbol{Price}
+\end{schema} \\
+
+\subsection{InitialState}
+The InitialState schema defines the initial state of the vending machine, with empty sets for goods, coins, and prices, and a value for the maximum number of goods that can be stored in the machine.
+\begin{schema}{InitialState}
+\axiom{Goods}
+\zedsymbol{Goods} = \{\}
+\axiom{MaxGoods}
+\zedsymbol{MaxGoods} = n
+\axiom{Coins}
+\zedsymbol{Coins} = \{\}
+\axiom{Price}
+\zedsymbol{Price} = \{\}
+\end{schema}
+
+
+
+
+\subsection{setPrice}
+The SetPrice schema defines a schema that can be used to give a price to a good or to reprice an item that already has a price associated with it.
+\begin{schema}{SetPrice}
+\axiom{SetPrice}
+\zedsymbol{Price}[good] = price
+\end{schema}
+
+
+
+
+\subsection{AddCoins}
+The AddCoins schema in the LaTeX code I provided defines a schema for adding coins to the vending machine. It has a single axiom called AddCoins, which specifies that the set of coins in the vending machine should be updated to include the coins being added.
+\begin{schema}{AddCoins}
+\axiom{AddCoins}
+\zedsymbol{Coins} = \zedsymbol{Coins} \cup \{coin1, coin2, ...\}
+\end{schema}
+
+
+
+
+\subsection{BuyItem}
+The BuyItem schema defines what happens when someone buys an item from the vending machine, including the removal of the item from the set of goods and the addition of the coins used to purchase the item to the set of coins.
+\begin{schema}{BuyItem}
+\axiom{BuyItem}
+\zedsymbol{Goods} = \zedsymbol{Goods} - \{good\}
+\zedsymbol{Coins} = \zedsymbol{Coins} \cup \{coin1, coin2, ...\}
+\end{schema}
+
+
+
+\subsection{ItemNotAvailable}
+The ItemNotAvailable schema defines what happens when the item someone wants to buy is not available in the vending machine.
+\begin{schema}{ItemNotAvailable}
+\axiom{ItemNotAvailable}
+\zedsymbol{Goods} = \zedsymbol{Goods}
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+
+
+\subsection{OperationSucceeds}
+The OperationSucceeds schema defines a schema that specifies when a particular operation, such as setting the price of an item or adding coins to the machine, succeeds.
+\begin{schema}{OperationSucceeds}
+\axiom{OperationSucceeds}
+\zedsymbol{Goods} = \zedsymbol{Goods}'
+\zedsymbol{Coins} = \zedsymbol{Coins}'
+\end{schema}
+
+
+
+
+
+\subsection{OperationFails}
+The OperationFails schema defines a schema that specifies when a particular operation fails.
+\begin{schema}{OperationFails}
+\axiom{OperationFails}
+\zedsymbol{Goods} = \zedsymbol{Goods}
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+
+
+\subsection{OutOfItem}
+OutOfItem specifies that the set of goods in the vending machine should not be changed and the set of coins should remain the same if the vending machine is out of a particular item.
+\begin{schema}{OutOfItem}
+\axiom{OutOfItem}
+\zedsymbol{Goods} \neq \zedsymbol{Goods}'
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+
+
+\subsection{MaxCapacityReached}
+A schema to check if the vending machine has reached its maximum capacity for storing goods
+\begin{schema}{MaxCapacityReached}
+\axiom{MaxCapacityReached}
+\zedsymbol{Goods} \neq \zedsymbol{Goods}'
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+\subsection{InsufficientFunds}
+MaxCapacityReached specifies that the set of goods in the vending machine should not be changed and the set of coins should remain the same if the vending machine has reached its maximum capacity for storing goods.
+\begin{schema}{InsufficientFunds}
+\axiom{InsufficientFunds}
+\zedsymbol{Goods} = \zedsymbol{Goods}
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+
+
+\subsection{OutOfChange}
+A schema to check if the vending machine is out of change
+\begin{schema}{OutOfChange}
+\axiom{OutOfChange}
+\zedsymbol{Goods} = \zedsymbol{Goods}
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+
+\subsection{Malfunction}
+Malfunction specifies that the sets of goods and coins in the vending machine should not be changed if the vending machine has a malfunction.
+\begin{schema}{Malfunction}
+\axiom{Malfunction}
+\zedsymbol{Goods} = \zedsymbol{Goods}
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+
+\subsection{Tampering}
+This schema defines an axiom called Tampering that specifies that the sets of goods and coins in the vending machine should not be changed if the vending machine has been tampered with
+\begin{schema}{Tampering}
+\axiom{Tampering}
+\zedsymbol{Goods} = \zedsymbol{Goods}
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+
+\subsection{LowOnItem}
+LowOnItem specifies that the sets of goods and coins in the vending machine should not be changed if the vending machine is running low on a particular item.
+\begin{schema}{LowOnItem}
+\axiom{LowOnItem}
+\zedsymbol{Goods} = \zedsymbol{Goods}
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+
+\subsection{Vandalism}
+Vandalism specifies that the sets of goods and coins in the vending machine should not be changed if the vending machine has been vandalized.
+\begin{schema}{Vandalism}
+\axiom{Vandalism}
+\zedsymbol{Goods} = \zedsymbol{Goods}
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+
+\subsection{PowerOutage}
+ PowerOutage that specifies that the sets of goods and coins in the vending machine should not be changed if the vending machine has experienced a power outage
+\begin{schema}{PowerOutage}
+\axiom{PowerOutage}
+\zedsymbol{Goods} = \zedsymbol{Goods}
+\zedsymbol{Coins} = \zedsymbol{Coins}
+\end{schema}
+
+\section{THE-LIBRARY-MANAGEMENT-SYSTEM}
+By defining the sets of entities that the system will need to manage, such as books, copies of books, people, authors, and subjects. operations that the system will support, such as checking out a book, returning a book, adding a book to the library, and removing a book from the library
+
+\subsection{state-space-schema}
+This schema defines the sets of books, copies of books, people, authors, subjects, and reports that the Library Management System will need to manage
+\begin{schema}{LibraryManagementSystem}
+\zedsymbol{Books}
+\zedsymbol{Copies}
+\zedsymbol{People}
+\zedsymbol{Authors}
+\zedsymbol{Subjects}
+\zedsymbol{Reports}
+\end{schema}
+
+\subsection{InitialState}
+InitialState specifies that the sets of books, copies of books, people, authors, subjects, and reports should all be empty when the Library Management System is first launched.
+\begin{schema}{InitialState}
+\axiom{InitialState}
+\zedsymbol{Books} = \emptyset
+\zedsymbol{Copies} = \emptyset
+\zedsymbol{People} = \emptyset
+\zedsymbol{Authors} = \emptyset
+\zedsymbol{Subjects} = \emptyset
+\zedsymbol{Reports} = \emptyset
+\end{schema}
+
+
+\subsection{Checkout}
+CheckOutBook removes a book from the set of books and adds a copy of the book and a person to the sets of copies and people, respectively.
+\begin{schema}{CheckOutBook}
+\operation{CheckOutBook}
+\zedsymbol{Books} = \zedsymbol{Books} \setminus \{book\}
+\zedsymbol{Copies} = \zedsymbol{Copies} \cup \{copy\}
+\zedsymbol{People} = \zedsymbol{People} \cup \{person\}
+\end{schema}
+
+
+\subsection{ReturnBook}
+ReturnBook adds a book to the set of books and removes a copy of the book and a person from the sets of copies and people, respectively.
+\begin{schema}{ReturnBook}
+\operation{ReturnBook}
+\zedsymbol{Books} = \zedsymbol{Books} \cup \{book\}
+\zedsymbol{Copies} = \zedsymbol{Copies} \setminus \{copy\}
+\zedsymbol{People} = \zedsymbol{People} \setminus \{person\}
+\end{schema}
+
+\subsection{AddBook}
+AddBook adds a book and its associated author and subjects to the sets of books, authors, and subjects, respectively.
+\begin{schema}{AddBook}
+\operation{AddBook}
+\zedsymbol{Books} = \zedsymbol{Books} \cup \{book\}
+\zedsymbol{Authors} = \zedsymbol{Authors} \cup \{author\}
+\zedsymbol{Subjects} = \zedsymbol{Subjects} \cup \{subject1, subject2, ...\}
+\end{schema}
+
+
+
+\subsection{ListBooksByAuthorOrSubject}
+ListBooksByAuthorOrSubject generates a report of books by author or subject area and adds it to the set of reports.
+\begin{schema}{ListBooksByAuthorOrSubject}
+\operation{ListBooksByAuthorOrSubject}
+\zedsymbol{Reports} = \zedsymbol{Reports} \cup \{report\}
+\end{schema}
+
+
+\subsection{RemoveBook}
+RemoveBook removes a book and its associated author and subjects from the sets of books, authors, and subjects, respectively.
+\begin{schema}{RemoveBook}
+\operation{RemoveBook}
+\zedsymbol{Books} = \zedsymbol{Books} \setminus \{book\}
+\zedsymbol{Authors} = \zedsymbol{Authors} \setminus \{author\}
+\zedsymbol{Subjects} = \zedsymbol{Subjects} \setminus \{subject1, subject2, ...\}
+\end{schema}
+
+\subsection{BookAvailable}
+ BookAvailable specifies that the sets of books and copies should not be changed if a book is available for checkout.
+\begin{schema}{BookAvailable}
+\axiom{BookAvailable}
+\zedsymbol{Books} = \zedsymbol{Books}
+\zedsymbol{Copies} = \zedsymbol{Copies}
+\end{schema}
+
+\subsection{BookCheckedOut}
+BookCheckedOut specifies that the sets of books and copies should not be changed if a book is checked out.
+\begin{schema}{BookCheckedOut}
+\axiom{BookCheckedOut}
+\zedsymbol{Books} = \zedsymbol{Books}
+\zedsymbol{Copies} = \zedsymbol{Copies}
+\end{schema}
+
+
+\end{document}
