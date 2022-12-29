@@ -12,7 +12,9 @@ The specification for the library management system defines the various entities
 ## Getting Started
 To use the specifications in this repository, you will need to have LaTeX installed on your system. You can find instructions for installing LaTeX on the LaTeX Project website.
 
-Once you have LaTeX installed, you can compile the specifications by using the pdflatex command. For example, to compile the vending machine specification, you can run the following command:
+Once you have LaTeX installed, you can compile the specifications by using the pdflatex command. For example, to compile the vending machine specification, you can run the following command: `pdflatex vending-machine.tex`
+
+
 ## Using the specifications
 The specifications are written in LaTeX and can be compiled using a LaTeX compiler. The compiled PDF documents will provide a detailed and comprehensive description of the behavior and requirements of the vending machine and library management system.
 
